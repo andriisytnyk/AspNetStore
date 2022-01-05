@@ -25,12 +25,7 @@ namespace AspNetStore.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _db.Product;
-
-            foreach (var obj in objList)
-            {
-                obj.Category = _db.Category.FirstOrDefault(c => c.Id == obj.CategoryId);
-            }
+            IEnumerable<Product> objList = _db.Product.Include(p => p.Category).Include(p => p.ApplicationType);
 
             return View(objList);
         }
@@ -52,6 +47,11 @@ namespace AspNetStore.Controllers
             {
                 Product = new Product(),
                 CategorySelectList = _db.Category.Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                }),
+                ApplicationTypeSelectList = _db.ApplicationType.Select(c => new SelectListItem
                 {
                     Text = c.Name,
                     Value = c.Id.ToString()
@@ -128,6 +128,11 @@ namespace AspNetStore.Controllers
                 Text = c.Name,
                 Value = c.Id.ToString()
             });
+            productVM.ApplicationTypeSelectList = _db.ApplicationType.Select(c => new SelectListItem
+            {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
             return View(productVM);
         }
 
@@ -138,7 +143,7 @@ namespace AspNetStore.Controllers
             {
                 return NotFound();
             }
-            Product product = _db.Product.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
+            Product product = _db.Product.Include(p => p.Category).Include(p => p.ApplicationType).FirstOrDefault(p => p.Id == id);
             if (product == null)
             {
                 return NotFound();
