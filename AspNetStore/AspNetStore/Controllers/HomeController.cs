@@ -33,6 +33,17 @@ namespace AspNetStore.Controllers
             return View(homeVM);
         }
 
+        public IActionResult Details(int id)
+        {
+            DetailsVM detailsVM = new DetailsVM()
+            {
+                Product = _db.Product.Include(p => p.Category).Include(p => p.ApplicationType).Where(p => p.Id == id).FirstOrDefault(),
+                ExistInCart = false
+            };
+
+            return View(detailsVM);
+        }
+
         public IActionResult Privacy()
         {
             return View();
