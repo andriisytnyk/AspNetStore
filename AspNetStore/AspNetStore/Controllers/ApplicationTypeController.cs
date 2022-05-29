@@ -1,10 +1,12 @@
 ﻿using AspNetStore.Data;
 using AspNetStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace AspNetStore.Controllers
 {
+    [Authorize(Roles = WC.AdminRole)]
     public class ApplicationTypeController : Controller
     {
         private readonly ApplicationDbContext _db;
