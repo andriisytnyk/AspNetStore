@@ -3,15 +3,13 @@ using Mailjet.Client.Resources;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Threading.Tasks;
 
-namespace AspNetStore.Utility
+namespace AspNetStore_Utility
 {
     public class EmailSender : IEmailSender
     {
         private readonly IConfiguration _configuration;
-        public MailJetSettings MailJetSettings { get; set; }
+        public MailJetSettings? MailJetSettings { get; set; }
 
         public EmailSender(IConfiguration configuration)
         {
@@ -27,11 +25,11 @@ namespace AspNetStore.Utility
         {
             MailJetSettings = _configuration.GetSection("MailJet").Get<MailJetSettings>();
 
-            MailjetClient client = new MailjetClient(MailJetSettings.ApiKey, MailJetSettings.SecretKey)
+            var client = new MailjetClient(MailJetSettings.ApiKey, MailJetSettings.SecretKey)
             {
                 Version = ApiVersion.V3_1,
             };
-            MailjetRequest request = new MailjetRequest
+            var request = new MailjetRequest
             {
                 Resource = Send.Resource,
             }.Property(Send.Messages, new JArray 

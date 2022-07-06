@@ -1,7 +1,7 @@
 ﻿using AspNetStore.Data;
 using AspNetStore.Models;
 using AspNetStore.Models.ViewModels;
-using AspNetStore.Utility;
+using AspNetStore_Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;

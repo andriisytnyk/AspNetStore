@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 
-namespace AspNetStore.Utility
+namespace AspNetStore_Utility
 {
     public static class SessionExtensions
     {
@@ -10,7 +10,7 @@ namespace AspNetStore.Utility
             session.SetString(key, JsonSerializer.Serialize(value));
         }
 
-        public static T Get<T>(this ISession session, string key)
+        public static T? Get<T>(this ISession session, string key)
         {
             var value = session.GetString(key);
             return value == null ? default : JsonSerializer.Deserialize<T>(value);

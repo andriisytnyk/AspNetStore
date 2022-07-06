@@ -1,5 +1,5 @@
 using AspNetStore.Data;
-using AspNetStore.Utility;
+using AspNetStore_Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

@@ -1,4 +1,4 @@
-﻿namespace AspNetStore
+﻿namespace AspNetStore_Utility
 {
     public static class WC
     {
